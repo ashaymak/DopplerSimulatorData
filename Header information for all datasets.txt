@@ -1,0 +1,5 @@
+Each of the text files have header info:
+Club Type: Driver / 7 Iron / Wedge
+Sample Freq: 17000
+Radar Freq: 10.5 GHz
+Voltage A2D Data:
