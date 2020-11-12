@@ -94,9 +94,9 @@ plot((t(tc)+3400/Fs)*1000,mc*l,'Color',[0.717647058823529 0.274509803921569 1],'
 hold on
  
 tS= 0.216:((0.24-0.216)/68):0.24-((0.24-0.216)/68);
-ttttt=0.016:((0.04-0.016)/68):0.04-((0.04-0.016)/68);
+tSE=0.016:((0.04-0.016)/68):0.04-((0.04-0.016)/68);
 WSwing=-1.868e+06*tS.^2 + 9.068e+05*tS -1.077e+05;
-plot((ttttt+3400/Fs)*1000,WSwing*l,'--k','LineWidth',4);legend('Median Frequency Estimate','Fitted Model')
+plot((tSE+3400/Fs)*1000,WSwing*l,'--k','LineWidth',4);legend('Median Frequency Estimate','Fitted Model')
 hold off;
 
 
@@ -144,9 +144,9 @@ plot((t(tc)+3400/Fs)*1000,mc*l,'Color',[0.717647058823529 0.274509803921569 1],'
 hold on
 
 tS= 0.216:((0.24-0.216)/68):0.24-((0.24-0.216)/68);
-ttttt=0.016:((0.04-0.016)/68):0.04-((0.04-0.016)/68);
+tSE=0.016:((0.04-0.016)/68):0.04-((0.04-0.016)/68);
 ISwing=-2.857e+06*tS.^2 + 1.383e+06*tS -1.644e+05;
-plot((ttttt+3400/Fs)*1000,ISwing*l,'--k','LineWidth',4);legend('Median Frequency Estimate','Fitted Model')
+plot((tSE+3400/Fs)*1000,ISwing*l,'--k','LineWidth',4);legend('Median Frequency Estimate','Fitted Model')
 hold off;
 
 
@@ -183,7 +183,7 @@ hold on;
 plot((t(t1)+3400/Fs)*1000,m1*l,'Color',[0.717647058823529 0.274509803921569 1],'linewidth',4)
 
 tS= 0.213:((0.235-0.213)/62):0.235-((0.235-0.213)/62);
-ttttt=0.012:((0.034-0.012)/62):0.034-((0.034-0.012)/62);
+tSE=0.012:((0.034-0.012)/62):0.034-((0.034-0.012)/62);
 WSwing=-4.546e+06*tS.^2 + 2.148e+06*tS -2.506e+05;
-plot((ttttt+3400/Fs)*1000,WSwing*l,'--k','LineWidth',5);
+plot((tSE+3400/Fs)*1000,WSwing*l,'--k','LineWidth',5);
 hold off; legend('Median Frequency Estimate','Fitted Model')
