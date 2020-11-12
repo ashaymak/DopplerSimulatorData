@@ -53,21 +53,18 @@ l=0.02855;
 %% Time sample parameters
 
 Fs=17000;                   %Sampling frequency 
-t0W=(0:3559)/Fs;            % Deadtime before downswing
-% tWD=(3560:4200)/Fs;         % Time for Wedge downswing
-tWD=0.216:((0.24-0.216)/Fs):0.24-((0.24-0.216)/Fs);
+t0W=(0:3559)/Fs;            % Deadtime before downswing       
+tWD=0.216:((0.24-0.216)/Fs):0.24-((0.24-0.216)/Fs); % Time for Wedge downswing
 tWB_1=(4201:14499)/Fs;      % Time for Wedge ball before gain switch
 tWB_2=(14500:76500)/Fs;     % Time for Wedge ball after gain switch
 
-t0D=(0:3594)/Fs; % Change made here from Driver Final
-% tDD=(3595:3935)/Fs;
+t0D=(0:3594)/Fs; 
 tDD=0.21:((0.234-0.21)/Fs):0.234-((0.234-0.21)/Fs);
 tDB_1=(3936:14399)/Fs;
 tDB_2=(14400:106054)/Fs;
 
-t0I=(0:3603)/Fs;            % Deadtime before downswing
-% tID=(3604:3995)/Fs;         % Time for 7 Iron downswing
-tID=0.216:((0.234-0.216)/Fs):0.234-((0.234-0.216)/Fs);
+t0I=(0:3603)/Fs;            % Deadtime before downswing     
+tID=0.216:((0.234-0.216)/Fs):0.234-((0.234-0.216)/Fs);  % Time for 7 Iron downswing
 tIB_1=(3996:14300)/Fs;      % Time for 7 Iron ball before gain switch
 tIB_2=(14301:102000)/Fs;     % Time for 7 iron ball after gain switch
 
@@ -80,9 +77,6 @@ Wball_2=2.963*tWB_2.^4 -35.81*tWB_2.^3 + 276.1*tWB_2.^2 -1127*tWB_2 + 2554;
 
 
 IDownSwing=-2.857e+06*tID.^2 + 1.383e+06*tID -1.644e+05;
-Iball_1=11.42*tIB_1.^4  -134.6*tIB_1.^3 + 669.2*tIB_1.^2 + -1975*tIB_1 + 4207;
-Iball_2=11.42*tIB_2.^4  -134.6*tIB_2.^3 + 669.2*tIB_2.^2 + -1975*tIB_2 + 4207;
-
 Iball_1=2.602*tIB_1.^4  -45.35*tIB_1.^3 + 353.3*tIB_1.^2 + -1526*tIB_1 + 4011;
 Iball_2=2.602*tIB_2.^4  -45.35*tIB_2.^3 + 353.3*tIB_2.^2 + -1526*tIB_2 + 4011;
 

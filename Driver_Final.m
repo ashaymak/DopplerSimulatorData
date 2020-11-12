@@ -2,6 +2,7 @@ close all;
 %% Initial parameters
 Fs=17000;
 Ts=1/Fs;
+%% Import dataset
 filename = 'Driver_Shot.txt';
 AllData = fileread(filename);
 [~, beg_idx] = regexp(AllData,':'); % start extracting data after ':' character is found 
@@ -11,25 +12,27 @@ DriverData = str2double(AllData{1});  %Data values has all the data values from 
 t3=0:Ts:length(DriverData)/Fs-Ts; 
 
 
-%% Sample-time parameters
-t0=(0:3629)/Fs;
-tDD=(3595:3935)/Fs;
-t01=(3936:4100)/Fs;
-tDB_1=(4101:14399)/Fs;
-tDB_2=(14400:106054)/Fs;
-% tFT=(4054:4404)/Fs;  %Time for Follow through
+%% Time segmentation
+t0=(0:3629)/Fs;             %Dead time before downswing
+tDD=(3595:3935)/Fs;         %Time for Driver downswing
+t01=(3936:4100)/Fs;         %Dead time after downswing
+tDB_1=(4101:14399)/Fs;      %Time for Driver ball before gain switch
+tDB_2=(14400:106054)/Fs;    %Time for Driver ball after gain switch
+
 
 %% Frequency vs time expressions
-spinfreq=45.96;
+spinfreq=45.96;         %spin rate specified in Hz
+
 D0=zeros(1,length(t0));
 DDownSwing=-4.546e+06*tDD.^2 + 2.148e+06*tDD -2.506e+05;
-% DFollowThrough=-184615.385*t2+47030.77;% Follow through relative to main time
 D01=zeros(1,length(t01));
 Dball_1=0.9761*tDB_1.^4 -22.672*tDB_1.^3+254.2*tDB_1.^2-1480.7*tDB_1+5219.5;
-h1t = Dball_1+spinfreq;
-h1b = Dball_1-spinfreq;
+
+h1t = Dball_1+spinfreq;     %First harmonic top
+h1b = Dball_1-spinfreq;     %Fist harmonic bottom
+
 Dball_2=0.9761*tDB_2.^4 -22.672*tDB_2.^3+254.2*tDB_2.^2-1480.7*tDB_2+5219.5;
-% figure;plot(tDD,DDownSwing)
+
 
 %% Amplitude vs time expressions
 d0=0.01;
@@ -62,17 +65,12 @@ x_spin=x2+x_h1t+x_h1b;
 
 x3 = dBall_2.*exp(-1j*2*pi*f3); 
 
+%% Concatenate signals together
 x_d=[x0 x1 x01 x2 x3];
 t_d=[t0 tDD t01 tDB_1 tDB_2];
 
-%% Time Domain and Spectrogram Plot
+%% Spectrogram Plot
 
-
-% wlen = 200;                             %length of window                 
-% overlap = wlen*0.95;                     %50 percent overlap                    
-% nfft = wlen;                            %number of dft points                
-% win = kaiser(wlen,15);                  %specifies type of window
-% Fs=17000;
 
 
 wlen = 600;                             %length of window                 
@@ -82,24 +80,18 @@ win = hann(wlen);                       %specifies type of window
 Fs=17000;
 
 figure('Color',[1 1 1]);
-% subplot(2,1,1)
-% plot(t_d,imag(x_d),'k')
-% hold on 
-% plot(t_d,real(x_d),'Color',[0 0 0.4]); %Time Domain Signal
-% xlabel("Time (s)");
-% ylabel("Amplitude");grid on;
-% legend("Quadrature","In phase")
-% subplot(2,1,2); 
-[s,f,t1,p]=spectrogram(x_d,win,overlap,nfft,Fs,'MinThreshold',50,'twosided'); %Spectrogram
+[s,f,t1,p]=spectrogram(x_d,win,overlap,nfft,Fs,'MinThreshold',50,'twosided'); 
 view(0,90);colormap jet;
-v=(flip(-f)*0.02855)/2;
+
+v=(flip(-f)*0.02855)/2;     % Convert frequency axis to velocity
 P=10*log10(abs(p));
 imagesc(t1,(-v),P);
 axis xy; axis tight; colormap(jet); 
 xlabel("Time (s)")
 ylabel("Radial Velocity (m/s)")
 ylim([0 80]);
-% xlim([200 270])
+
+
 c=colorbar;
 c.Label.String='Power/frequency (dB/Hz)';
 
