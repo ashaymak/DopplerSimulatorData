@@ -1,6 +1,7 @@
 close all;
 
-%% Load golf shot data: P
+%% Load golf shot data: 
+%Please change filename according to dataset being used, then uncomment the correct section
 filename = 'Driver_Shot.txt';
 AllData = fileread(filename);
 [~, beg_idx] = regexp(AllData,':'); % start extracting data after ':' character is found 
@@ -18,7 +19,7 @@ t=0:Ts:((length(GolfBallData)-1)/Fs);
 
 %%  Wedge Spin Check 
 
-% WSpin=GolfBallData(5100:5200);% This is the one that was used 
+% WSpin=GolfBallData(5100:5200);
 
 % Y=fft(WSpin);
 
