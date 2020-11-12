@@ -66,9 +66,7 @@ dDownSwing =5.701e+06*exp(-((tDD-0.2141)/0.001708).^2) + 2.916e+06*exp(-((tDD-0.
 dBall_1= 2.434e+10*exp(-41.53*tDB_1) + 1.132e+06*exp(-6.129*tDB_1);% Ball before gain
 dBall_2 =1.071e5*exp(-1.492*tDB_2)+4.298e4*exp(-0.009711*tDB_2);% Ball after gain
 
-% dBall_2 =649.7*exp(-2.948*tDB_2)+4.158e4*exp(-0.01919*tDB_2);% Ball after gain
-% 
-% figure;plot(tDB_2,dBall_21);hold on;plot(tDB_2,dBall_2);hold off
+
 %% Downswing amplitude comparison
 figure('Color',[1 1 1]);
 subplot(3,1,1)
