@@ -113,9 +113,7 @@ D01=zeros(1,length(t01));
 % DownSwing=2.*(DownSwing)./0.02855;
 
 d0=0.01;
-% AMP_DownSwing =5.701e+06*exp(-((tDS-0.2141)/0.001708).^2) + 2.916e+06*exp(-((tDS-0.2191)/0.009985).^2);
-% AMP_Ball_1= 2.434e+10*exp(-41.53*tB_1) + 1.132e+06*exp(-6.129*tB_1);% Ball before gain
-% AMP_Ball_2 =1.071e5*exp(-1.492*tB_2)+4.298e4*exp(-0.009711*tB_2);% Ball after gain
+
 
 
 AMP_DownSwing=-2.336e+08*exp(-((tDS-0.226)/0.007089).^2) + 2.34e+08*exp(-((tDS-0.226)/0.007136).^2);
@@ -128,24 +126,19 @@ AMP_Ball_2=1.01e+07*exp(-4.353*tB_2) + 5.369e+04*exp(-0.0977*tB_2);
 fDopp=(2*v(1:end-1)./cosd(10))./0.02855;
 fclub=2*VxI./0.02855;
 
-% figure;plot([tDS tB_1 tB_2],[fclub fDopp])
+
 
 spinfreq=Spin/60;
 
 h1t=fDopp(1:length(tB_1))+spinfreq;
 h1b=fDopp(1:length(tB_1))-spinfreq;
 
-% h2t=fDopp+2*spinfreq;
-% h2b=fDopp-2*spinfreq;
-% figure;
-% plot(fDopp);hold on;plot(h1t);plot(h1b);plot(h2t);plot(h2b);hold off;
+
 
 fBall=cumsum(fDopp)/Fs;
 f_h1t=cumsum(h1t)/Fs;
 f_h1b=cumsum(h1b)/Fs;
  
-% f_h2t=cumsum(h2t)/Fs;
-% f_h2b=cumsum(h2b)/Fs;
 
 f0=cumsum(D0)/Fs;
 f1=cumsum(fclub)/Fs;
@@ -160,15 +153,14 @@ xBall=aBall.*exp(-1j*2*pi*fBall);
 %Spin harmonics
 xh1t = 0.2*AMP_Ball_1.*exp(-1j*2*pi*f_h1t); 
 xh1b = 0.2*AMP_Ball_1.*exp(-1j*2*pi*f_h1b); 
-% xh2t = 0.05*aBall.*exp(-1j*2*pi*f_h2t);
-% xh2b = 0.05*aBall.*exp(-1j*2*pi*f_h2b);
+
 
 xCombined =xBall(1:length(tB_1))+xh1t+xh1b; 
 
 x=[x0 x1 x01 xCombined xBall(length(tB_1)+1:end)];
 t=[t0 tDS t01 tB_1 tB_2];
 
-% figure;plot(phase(x))
+
 figure('Color',[1 1 1]);
 subplot(2,1,1);
 plot(t,real(x),'k');hold on;
