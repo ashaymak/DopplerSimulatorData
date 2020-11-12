@@ -1,7 +1,7 @@
 close all;
 
 %% Load golf shot data: 
-%Please change filename according to dataset being used, then uncomment the correct section
+%Please change filename according to dataset being used, then uncomment the corresponding section below
 filename = 'Driver_Shot.txt';
 AllData = fileread(filename);
 [~, beg_idx] = regexp(AllData,':'); % start extracting data after ':' character is found 
